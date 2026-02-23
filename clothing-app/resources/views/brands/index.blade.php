@@ -25,6 +25,7 @@
                                 :description="$brand->description"
                                 :image="$brand->image"
                             />
+
                         @endforeach
                     </div>
 

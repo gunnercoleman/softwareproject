@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Brand extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'environmental_score',
+        'environmental_impact',
+        'description',
+        'image'
+    ];
 }

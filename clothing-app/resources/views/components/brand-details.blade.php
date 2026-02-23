@@ -10,7 +10,7 @@
 
 
         <div class="overflow-hidden rounded-lg mb-4 flex justify-center">
-            <img src="{{ asset('images/clubs/' . $image)}}" alt="{{$name}}"
+            <img src="{{ asset('images/brands/' . $image)}}" alt="{{$name}}"
             class="w-full max-w-xs h-auto object-cover">
         </div>
 

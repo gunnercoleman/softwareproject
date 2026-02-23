@@ -22,6 +22,34 @@
                             :environmental_impact="$brand->environmental_impact"
                         />
 
+                    </a>
+
+                    <div class="border flex space-x-2 rounded-lg shadow-md p-6 bg-white hover:shadow-lg transition duration-300 max-w-xl mx-auto">
+
+                            @if(Auth::user()->role === 'admin')
+
+                                <button>
+                                <a href="{{ route('brands.edit', $brand) }}" class="text-gray-600 bg-gray-300 hover:bg-red-700 font-bold py-2 px-4 rounded">
+                                    Edit
+                                </a>
+                                </button>
+
+                            @endif    
+
+                                <form action="{{ route('brands.destroy', $brand) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this brand?');">
+
+                                @if(Auth::user()->role === 'admin')
+
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-gray-600 bg-gray-300 hover:bg-red-700 font-bold py-2 px-4 rounded">
+                                        Delete
+                                    </button>
+
+                                @endif
+
+                                </form>
+
 
             </div>
         </div>
