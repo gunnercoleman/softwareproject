@@ -14,7 +14,8 @@ class Item extends Model
         'environmental_score',
         'environmental_impact',
         'description',
-        'image'
+        'image',
+        'price',
     ];
 
     public function category()

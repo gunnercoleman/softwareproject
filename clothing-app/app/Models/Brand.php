@@ -12,6 +12,7 @@ class Brand extends Model
     protected $fillable = [
         'name',
         'environmental_score',
+        'price',
         'environmental_impact',
         'description',
         'image'
