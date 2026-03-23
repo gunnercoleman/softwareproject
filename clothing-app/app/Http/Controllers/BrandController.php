@@ -66,6 +66,7 @@ class BrandController extends Controller
      */
     public function show(Brand $brand)
     {
+        $brand -> load('items');
         return view('brands.show', compact('brand'));
     }
 

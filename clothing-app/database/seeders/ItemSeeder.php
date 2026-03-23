@@ -125,7 +125,7 @@ class ItemSeeder extends Seeder
                 'name' => 'Nike Air Jordan 4 Retro Bred',
                 'environmental_score' => 39,
                 'environmental_impact' => 'High impact on the environment',
-                                'price' => 500.00,
+                'price' => 500.00,
                 'description' => 'Stylish and iconic basketball shoes.',
                 'image' => 'nike_air_jordan_4_retro_bred.jpg',
                 'category_id' => 2,
