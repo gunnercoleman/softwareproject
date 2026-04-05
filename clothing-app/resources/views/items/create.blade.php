@@ -12,10 +12,13 @@
                     <div class="p-6 text-gray-900">
                         <h3 class="font-semibold text-lg mb-4">Create New Item:</h3>
 
-                        <x-item-form
+                        <x-item-form 
                             :action="route('items.store')"
-                            :method="'POST'"
+                            method="POST"
+                            :brands="$brands"
+                            :categories="$categories"
                         />
+
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 
 
-    @props(['action', 'method', 'item', 'brands' => []])
+    @props(['action', 'method', 'item', 'brands' => [], 'categories' => []])
 
     <form action="{{ $action }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -94,23 +94,47 @@
         
         <!-- Brands -->
 
-        <div class="mt-2 mb-5 space-y-2">
-            @foreach($brands as $brand)
-                <div class="flex items-center px-5">
-                    <input
-                        type="checkbox"
-                        name="brands[]"
-                        id="brand_{{ $brand->id }}"
-                        value="{{ $brand->id }}"
-                        @checked(isset($item) && $item->brands->contains($brand->id))
-                        class="h-4 w-4 text-blue-600 border-gray-300 rounded"
-                    />
+        <div class="mb-4">
+            <label for="brand_id" class="block text-sm text-gray-700">Brand</label>
 
-                    <label for="brand_{{ $brand->id }}" class="ml-2 text-sm text-gray-700">
+            <select name="brand_id" id="brand_id"
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+
+                @foreach($brands as $brand)
+                    <option value="{{ $brand->id }}"
+                        @selected(old('brand_id', $item->brand_id ?? '') == $brand->id)>
                         {{ $brand->name }}
-                    </label>
-                </div>
-            @endforeach
+                    </option>
+                @endforeach
+
+            </select>
+
+            @error('brand_id')
+                <p class="text-sm text-red-600">{{ $message }}</p>
+            @enderror
+        </div>
+
+         <!-- Category -->
+
+         <div class="mb-4">
+            <label for="category_id" class="block text-sm text-gray-700">Category</label>
+
+            <select name="category_id" id="category_id"
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}"
+                        @selected(old('category_id', $item->category_id ?? '') == $category->id)>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+
+            </select>
+
+            @error('category_id')
+                <p class="text-sm text-red-600">{{ $message }}</p>
+            @enderror
+
         </div>
 
         <!-- Image Upload -->

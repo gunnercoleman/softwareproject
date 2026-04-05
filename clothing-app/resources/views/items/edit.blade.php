@@ -16,6 +16,8 @@
                             :action="route('items.update', $item)"
                             :method="'PUT'"
                             :item="$item"
+                            :brands="$brands"
+                            :categories="$categories"
                         />
                     </div>
                 </div>

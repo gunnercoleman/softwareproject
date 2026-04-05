@@ -67,9 +67,8 @@
                             <h3 class="mb-4">Description: {{ $item->description }}</h3>
 
                             <div class="flex justify-center mb-4">
-                                <img src="{{ asset('images/brands/' . $item->image)}}" 
-                                    alt="{{$item->name}}"
-                                    class="w-full max-w-xs h-auto object-cover rounded">
+                                <img src="{{asset('images/items/' . $item->image)}}" alt="{{ $item->name }}"
+                                class="w-full max-w-xs h-auto object-cover rounded">
                             </div>
 
                             <!-- Buttons UNDER everything -->
