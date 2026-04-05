@@ -24,65 +24,73 @@
 
                     </a>
 
+                    <div class="flex flex-col gap-3 items-center mt-6">
+
+                    @if(Auth::user()->role === 'admin')
+
+                        <!-- Edit -->
+                        <a href="{{ route('brands.edit', $brand) }}"
+                            class="w-48 text-center text-gray-600 bg-gray-300 hover:bg-blue-700 font-bold py-2 px-4 rounded transition duration-200">
+                            Edit
+                        </a>
+
+                        <!-- Delete -->
+                        <form action="{{ route('brands.destroy', $brand) }}" method="POST"
+                                onsubmit="return confirm('Are you sure you want to delete this brand?');"
+                                class="w-48">
+                            @csrf
+                            @method('DELETE')
+
+                            <button type="submit"
+                                class="w-full text-white bg-red-600 hover:bg-red-800 font-bold py-2 px-4 rounded transition duration-200">
+                                Delete
+                            </button>
+                        </form>
+
+                    @endif
+
+                    </div>
+
                     <div class="border flex mt-10 mb-10 space-x-2 rounded-lg shadow-md p-6 bg-white justify-center max-w-xl mx-auto">
                         <h1 class="font-bold text-black-600 mb-2" style="font-size: 3rem;">Associated Items</h1>
                      </div>
 
-                    <ul class="flex">
+                    <div class="flex flex-wrap gap-10 justify-center">
                         @foreach($brand->items as $item)
-                        <div>
-                                <h1 class="font-bold text-black-600 mb-2" style="font-size: 2rem;">{{ $item->name }}</h1>
 
-                                <h3 class="font-semibold text-lg mb-4">Environmental Impact: {{ $item->environmental_impact }}</h3>
+                        <div class="border rounded-lg shadow-md p-6 bg-white max-w-sm">
 
-                                <h3 class="font-semibold text-lg mb-4">Price: {{ $item->price }}</h3>
+                            <h1 class="font-bold mb-2 text-2xl">{{ $item->name }}</h1>
 
-                                <h3 class="font-semibold text-lg mb-4">Description: {{ $item->description }}</h3>
+                            <h3 class="mb-2">Environmental Impact: {{ $item->environmental_impact }}</h3>
+                            <h3 class="mb-2">Price: {{ $item->price }}</h3>
+                            <h3 class="mb-4">Description: {{ $item->description }}</h3>
 
-                                <div class="overflow-hidden rounded-lg flex justify-center mx-10">
-                                    <img src="{{ asset('images/brands/' . $item->image)}}" alt="{{$item->name}}"
-                                    class="w-full max-w-xs h-auto object-cover">
-                                </div>
+                            <div class="flex justify-center mb-4">
+                                <img src="{{ asset('images/brands/' . $item->image)}}" 
+                                    alt="{{$item->name}}"
+                                    class="w-full max-w-xs h-auto object-cover rounded">
+                            </div>
+
+                            <!-- Buttons UNDER everything -->
+                            <div class="flex flex-col gap-2">
+                                <a href="{{ route('items.edit', $item) }}" 
+                                class="text-center text-gray-600 bg-gray-300 hover:bg-red-700 font-bold py-2 px-4 rounded">
+                                    Edit
+                                </a>
+
+                                <form action="{{ route('items.destroy', $item) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="w-full text-gray-600 bg-red-500 hover:bg-red-700 font-bold py-2 px-4 rounded">
+                                        Delete
+                                    </button>
+                                </form>
+                            </div>
+
                         </div>
-
-                                <button>
-                                <a href="{{ route('items.edit', $item) }}" class="text-gray-600 bg-gray-300 hover:bg-red-700 font-bold py-2 px-4 rounded">
-                                    Edit
-                                </a>
-                                </button>
-
                         @endforeach
-                    </ul>
-
-                    <div class="border flex space-x-2 rounded-lg shadow-md p-6 bg-white hover:shadow-lg transition duration-300 max-w-xl mx-auto">
-
-                            @if(Auth::user()->role === 'admin')
-
-                                <button>
-                                <a href="{{ route('brands.edit', $brand) }}" class="text-gray-600 bg-gray-300 hover:bg-red-700 font-bold py-2 px-4 rounded">
-                                    Edit
-                                </a>
-                                </button>
-
-                            @endif    
-
-                        <form action="{{ route('brands.destroy', $brand) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this brand?');">
-
-                            @if(Auth::user()->role === 'admin')
-
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-gray-600 bg-gray-300 hover:bg-red-700 font-bold py-2 px-4 rounded">
-                                    Delete
-                                </button>
-
-                            @endif
-
-                        </form>
-
-
-            </div>
-        </div>
+                    </div>
     </div>
 </x-app-layout>
 </div>

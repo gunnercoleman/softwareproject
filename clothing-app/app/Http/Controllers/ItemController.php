@@ -27,26 +27,21 @@ class ItemController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, Brand $brand)
+    public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required',
             'environmental_score' => 'required',
             'environmental_impact' => 'required',
             'price' => 'required',
             'description' => 'required',
             'image' => 'required',
+            'brand_id' => 'required|exists:brands,id', 
         ]);
 
-        $brand->items()->create([
-            'name' => $request->input('name'),
-            'environmental_score' => $request->input('environmental_score'),
-            'environmental_impact' => $request->input('environmental_impact'),
-            'price' => $request->input('price'),
-            'description' => $request->input('description'),
-            'image' => $request->input('image'),
-            'brand_id' => $brand->id,
-        ]);
+        Item::create($validated);
+
+        return redirect()->route('brands.show', $validated['brand_id']);
     }
 
     /**
@@ -68,20 +63,30 @@ class ItemController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Item $item)
+    public function update(Request $request, Brand $brand, Item $item)
     {
-        $item->update($request->only(['name', 'environmental_score', 'environmental_impact', 'description', 'image', 'price']));
+        $validated = $request->validate([
+            'name' => 'required',
+            'environmental_score' => 'required',
+            'environmental_impact' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+            'image' => 'required',
+            'brand_id' => 'required|exists:brands,id', 
+        ]);
 
-        return redirect()->route('brands.show', $item->brand_id)->with('success', 'Item updated successfully!');
+        $item->update($validated);
+
+        return redirect()->route('brands.show', $brand)->with('success', 'Item updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Item $item)
-    {
-        $item->delete();
+public function destroy(Brand $brand, Item $item)
+{
+    $item->delete();
 
-        return redirect()->route('brands.show', $item->brand_id)->with('success', 'Item deleted successfully!');
-    }
+    return redirect()->route('brands.show', $brand)->with('success', 'Item deleted successfully!');
+}
 }

@@ -24,7 +24,7 @@ Route::middleware('auth')->group(function () {
 
 
 Route::resource('brands', BrandController::class);
-Route::resource('items', ItemController::class);
+Route::resource('brands.items', ItemController::class);
 Route::resource('categories', CategoryController::class);
 
 

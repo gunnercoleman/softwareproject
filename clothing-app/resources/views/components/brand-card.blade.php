@@ -10,5 +10,7 @@
 
     <img src="{{asset('images/brands/' . $image)}}">
 
+    
+
 
 </div>
