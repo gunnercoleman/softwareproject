@@ -44,6 +44,18 @@ class BrandSeeder extends Seeder
                 'created_at' => $currentTimestamp,
                 'updated_at' => $currentTimestamp
             ],
+
+            [
+                'name' => 'Adidas',
+                'environmental_score' => 40,
+                'environmental_impact' => 'Moderate impact on the environment',
+                'description' => 'A popular sports brand known for its athletic wear and footwear.',
+                'image' => 'adidas.jpg',
+                'created_at' => $currentTimestamp,
+                'updated_at' => $currentTimestamp
+            ],
         ]);
+
+
     }
 }

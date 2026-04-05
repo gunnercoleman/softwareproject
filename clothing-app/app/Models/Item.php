@@ -29,4 +29,9 @@ class Item extends Model
     {
         return $this->belongsTo(Brand::class);
     }
+
+    public function materials()
+    {
+        return $this->belongsToMany(Material::class);
+    }
 }

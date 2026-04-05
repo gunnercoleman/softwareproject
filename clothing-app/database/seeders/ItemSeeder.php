@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
 use App\Models\Item;
+use App\Models\Material;
 
 class ItemSeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class ItemSeeder extends Seeder
  {
         $currentTimestamp = Carbon::now();
 
-        Item::insert([
+        $items = [
             [
                 'name' => 'Nike Tech Fleece',
                 'environmental_score' => 23,
@@ -134,6 +135,15 @@ class ItemSeeder extends Seeder
                 'updated_at' => $currentTimestamp
             ],
 
-        ]);
+        ];
+
+        foreach ($items as $itemData)
+            {
+                $item = Item::create(array_merge($itemData, ['created_at' => $currentTimestamp, 'updated_at' => $currentTimestamp]));
+
+                $materials = Material::inRandomOrder()->take(2)->pluck('id');
+
+                $item->materials()->attach($materials);
+            }
     }
 }

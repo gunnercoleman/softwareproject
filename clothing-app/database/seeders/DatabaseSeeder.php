@@ -8,8 +8,13 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    public function run(): void
-    {
-         $this->call(BrandSeeder::class);
-    }
+public function run(): void
+{
+    $this->call([
+        CategorySeeder::class,
+        BrandSeeder::class,
+        MaterialSeeder::class,
+        ItemSeeder::class,
+    ]);
+}
 }
