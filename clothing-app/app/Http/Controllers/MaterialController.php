@@ -37,7 +37,7 @@ class MaterialController extends Controller
      */
     public function show(Material $material)
     {
-        //
+        return view('materials.show', compact('material'));
     }
 
     /**
