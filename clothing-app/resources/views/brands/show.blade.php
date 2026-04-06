@@ -71,7 +71,9 @@
                                 class="w-full max-w-xs h-auto object-cover rounded">
                             </div>
 
-                            <!-- Buttons UNDER everything -->
+                            @if(Auth::user()->role === 'admin')
+
+                            <!-- Buttons under each item -->
                             <div class="flex flex-col gap-2">
                                 <a href="{{ route('items.edit', $item) }}" 
                                 class="text-center text-gray-600 bg-gray-300 hover:bg-red-700 font-bold py-2 px-4 rounded">
@@ -86,6 +88,8 @@
                                     </button>
                                 </form>
                             </div>
+
+                            @endif
 
                         </div>
                         @endforeach

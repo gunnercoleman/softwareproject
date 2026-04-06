@@ -20,6 +20,10 @@
                         {{ __('Brands') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('materials.index')" :active="request()->routeIs('materials.index')">
+                        {{ __('Materials') }}
+                    </x-nav-link>
+
                     @if(Auth::user()->role === 'admin')
                     <x-nav-link :href="route('brands.create')" :active="request()->routeIs('brands.create')">
                         {{ __('Create Brand') }}
