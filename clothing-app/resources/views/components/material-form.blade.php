@@ -57,8 +57,8 @@
             @enderror
         </div>
 
-        
-        <!-- Brands -->
+
+        <!-- Associated Items -->
         <div class="mb-4">
             <label for="item_id" class="block text-sm text-gray-700">Associated Items</label>
 
@@ -78,6 +78,29 @@
                 <p class="text-sm text-red-600">{{ $message }}</p>
             @enderror
         </div>
+
+        <!-- Associated Items
+
+        <label for="image" class="block text-sm font-medium text-gray-700">Associated Items</label>
+
+        <div class="mt-2 mb-5 space-y-2">
+            @foreach($items as $item)
+                <div class="flex items-center px-5">
+                    <input
+                        type="checkbox"
+                        name="items[]"
+                        id="item_{{ $item->id }}"
+                        value="{{ $item->id }}"
+                        @checked(isset($material) && $material->items->contains($item->id))
+                        class="h-4 w-4 text-blue-600 border-gray-300 rounded"
+                    />
+
+                    <label for="item_{{ $item->id }}" class="ml-2 text-sm text-gray-700">
+                        {{ $item->name }}
+                    </label>
+                </div>
+            @endforeach
+        </div> -->
 
 
         <!-- Image Upload -->
