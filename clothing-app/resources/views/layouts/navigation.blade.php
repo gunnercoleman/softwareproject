@@ -36,6 +36,12 @@
                         {{ __('Create Item') }}
                     </x-nav-link>
                     @endif
+
+                    @if(Auth::user()->role === 'admin')
+                    <x-nav-link :href="route('materials.create')" :active="request()->routeIs('materials.create')">
+                        {{ __('Create Material') }}
+                    </x-nav-link>
+                    @endif
                 </div>
             </div>
 

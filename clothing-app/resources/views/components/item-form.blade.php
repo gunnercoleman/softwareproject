@@ -155,7 +155,7 @@
         <!-- Preview Existing Image -->
         @isset($item->image)
             <div class="mb-4">
-                <img src="{{ asset('images/brands/' . $item->image) }}" alt="$brand->image" class="w-24 h-32 object-cover">
+                <img src="{{ asset('images/items/' . $item->image) }}" alt="$item->image" class="w-24 h-32 object-cover">
             </div>
         @endisset
 

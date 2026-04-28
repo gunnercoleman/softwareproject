@@ -132,6 +132,28 @@
 
                     </div>
 
+                     @if(Auth::user()->role === 'admin')
+                    <div class="flex gap-4 mb-10 justify-center">
+
+                        <a href="{{ route('items.edit', $item) }}"
+                            class="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                            Edit Item
+                        </a>
+
+                        <form action="{{ route('items.destroy', $item) }}" method="POST"
+                            onsubmit="return confirm('Delete this item?');">
+                            @csrf
+                            @method('DELETE')
+
+                            <button 
+                                class="px-5 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
+                                Delete
+                            </button>
+                        </form>
+
+                    </div>
+                    @endif
+
                 </div>
 
                 @endforeach

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Material;
+use App\Models\Item;
 use Illuminate\Http\Request;
 
 class MaterialController extends Controller
@@ -21,7 +22,10 @@ class MaterialController extends Controller
      */
     public function create()
     {
-        //
+        if(auth()->user()->role !== 'admin'){
+            return redirect()->route('materials.index')->with('error', 'Unauthorized access !');
+        }
+        return view('materials.create', ['items' => Item::all()]);
     }
 
     /**
@@ -29,7 +33,10 @@ class MaterialController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(auth()->user()->role !== 'admin'){
+            return redirect()->route('materials.index')->with('error', 'Unauthorized access !');
+        }
+        // Store the new material
     }
 
     /**
@@ -45,7 +52,10 @@ class MaterialController extends Controller
      */
     public function edit(Material $material)
     {
-        //
+        return view('materials.edit', [
+            'material' => $material,
+            'items' => Item::all(),
+        ]);
     }
 
     /**
