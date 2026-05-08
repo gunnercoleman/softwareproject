@@ -21,7 +21,7 @@
             </div>
 
             <!-- Card Container -->
-            <div class="bg-white border border-gray-200 rounded-lg shadow-md p-6">
+            
 
                 <!-- Grid -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
@@ -40,7 +40,7 @@
 
                 </div>
 
-            </div>
+
 
         </div>
     </div>

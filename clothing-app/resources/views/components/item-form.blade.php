@@ -1,6 +1,6 @@
 
 
-    @props(['action', 'method', 'item', 'brands' => [], 'categories' => []])
+    @props(['action', 'method', 'item', 'brands' => [], 'categories' => [], 'materials' => []])
 
     <form action="{{ $action }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -136,6 +136,21 @@
             @enderror
 
         </div>
+
+        @foreach($materials as $material)
+
+            <label class="flex items-center gap-2 mb-1">
+
+                <input type="checkbox"
+                    name="materials[]"
+                    value="{{ $material->id }}"
+                    @checked(isset($item) && $item->materials->contains($material->id))>
+
+                {{ $material->name }}
+
+            </label>
+
+        @endforeach      
 
         <!-- Image Upload -->
         <div class="mb-4">

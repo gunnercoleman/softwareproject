@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Material;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -25,7 +26,7 @@ class ItemController extends Controller
         if(auth()->user()->role !== 'admin'){
             return redirect()->route('brands.index')->with('error', 'Unauthorized access !');
         }
-        return view('items.create', ['brands' => Brand::all(), 'categories' => Category::all()]);
+        return view('items.create', ['brands' => Brand::all(), 'categories' => Category::all(), 'materials' => Material::all()]);
     }
 
     /**
@@ -42,6 +43,7 @@ class ItemController extends Controller
         'image' => 'required|image',
         'brand_id' => 'required|exists:brands,id',
         'category_id' => 'required|exists:categories,id',
+        'material_ids' => 'array|exists:materials,id',
     ]);
 
     if($request->hasFile('image')){
@@ -50,7 +52,7 @@ class ItemController extends Controller
         $request->image->move(public_path('images/items'), $imageName);
     }
 
-    Item::create([
+    $item = Item::create([
         'name' => $request->name,
         'environmental_score' => $request->environmental_score,
         'environmental_impact' => $request->environmental_impact,
@@ -59,11 +61,11 @@ class ItemController extends Controller
         'image' => $imageName,
         'brand_id' => $request->brand_id,
         'category_id' => $request->category_id,
-        'created_at' => now(),
-        'updated_at' => now()
     ]);
 
-        return to_route('brands.show', $request->brand_id)->with('success', 'Item created successfully !');
+    $item->materials()->attach($request->materials ?? []);
+
+    return to_route('brands.show', $request->brand_id)->with('success', 'Item created successfully !');
 
     }
 
@@ -72,7 +74,9 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-        //
+        $item->load(['brand', 'category', 'materials']);
+
+        return view('items.show', compact('item'));
     }
 
     /**
@@ -84,6 +88,7 @@ class ItemController extends Controller
             'item' => $item,
             'brands' => Brand::all(),
             'categories' => Category::all(),
+            'materials' => Material::all(),
         ]);
     }
 
@@ -92,17 +97,17 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item)
     {
-        $validated = $request->validate([
-            'name' => 'required',
-            'environmental_score' => 'required',
-            'environmental_impact' => 'required',
-            'price' => 'required',
-            'description' => 'required',
-            'brand_id' => 'required|exists:brands,id',
-            'category_id' => 'required|exists:categories,id', 
+        $item->update([
+            'name' => $request->name,
+            'environmental_score' => $request->environmental_score,
+            'environmental_impact' => $request->environmental_impact,
+            'price' => $request->price,
+            'description' => $request->description,
+            'brand_id' => $request->brand_id,
+            'category_id' => $request->category_id,
         ]);
-        
-        $item->update($validated);
+
+        $item->materials()->sync($request->materials ?? []);
 
         return redirect()->route('brands.show', $item->brand_id)->with('success', 'Item updated successfully!');
     }

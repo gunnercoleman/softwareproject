@@ -21,7 +21,12 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        if (auth()->user()->role !== 'admin') {
+                    return redirect()->route('dashboard')
+                        ->with('error', 'Unauthorized access!');
+                }
+
+        return view('categories.create');
     }
 
     /**
@@ -29,7 +34,21 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (auth()->user()->role !== 'admin') {
+            return redirect()->route('dashboard')
+                ->with('error', 'Unauthorized access!');
+        }
+
+        $request->validate([
+            'name' => 'required|string|max:255'
+        ]);
+
+        Category::create([
+            'name' => $request->name,
+        ]);
+
+        return redirect()->route('dashboard')
+            ->with('success', 'Category created successfully!');
     }
 
     /**
@@ -37,7 +56,12 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        $items = $category->items;
+
+        return view('categories.show', [
+            'category' => $category,
+            'items' => $items
+        ]);
     }
 
     /**
@@ -45,7 +69,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+
     }
 
     /**
@@ -53,7 +77,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+
     }
 
     /**
@@ -61,6 +85,14 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        if (auth()->user()->role !== 'admin') {
+            return redirect()->route('dashboard')
+                ->with('error', 'Unauthorized access!');
+        }
+
+        $category->delete();
+
+        return redirect()->route('dashboard')
+            ->with('success', 'Category deleted successfully!');
     }
 }

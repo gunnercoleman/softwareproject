@@ -25,6 +25,41 @@
                         {{ __('Materials') }}
                     </x-nav-link>
 
+                    <div class="relative inline-flex items-center h-16"
+                        x-data="{ open: false }"
+                        @keydown.escape.window="open = false">
+
+                        <!-- Button -->
+                        <button @click="open = !open"
+                            class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-white-500 hover:text-gray-400 focus:outline-none focus:text-gray-400 focus:border-gray-200 transition duration-150 ease-in-out">
+
+                            Categories
+
+                            <svg class="ml-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" />
+                            </svg>
+
+                        </button>
+
+                        <!-- Dropdown -->
+                        <div x-show="open"
+                            x-transition
+                            @click.away="open = false"
+                            class="absolute top-16 left-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50">
+
+                            @foreach($categories as $category)
+                                <a href="{{ route('categories.show', $category) }}"
+                                class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                                    {{ $category->name }}
+                                </a>
+                            @endforeach
+
+                        </div>
+
+                    </div>
+
                     @if(Auth::user()->role === 'admin')
                     <x-nav-link :href="route('brands.create')" :active="request()->routeIs('brands.create')">
                         {{ __('Create Brand') }}
@@ -40,6 +75,12 @@
                     @if(Auth::user()->role === 'admin')
                     <x-nav-link :href="route('materials.create')" :active="request()->routeIs('materials.create')">
                         {{ __('Create Material') }}
+                    </x-nav-link>
+                    @endif
+
+                    @if(Auth::user()->role === 'admin')
+                    <x-nav-link :href="route('categories.create')" :active="request()->routeIs('categories.create')">
+                        {{ __('Create Category') }}
                     </x-nav-link>
                     @endif
                 </div>

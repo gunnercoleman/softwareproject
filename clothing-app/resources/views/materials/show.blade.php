@@ -1,50 +1,52 @@
 <x-app-layout>
     <x-slot name="header">
-
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Materials') }}
+            {{ __('Material Details') }}
         </h2>
-
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <h3 class="font-semibold text-lg mb-4">Material Details</h3>
-                    <a href="{{ route('materials.show', $material) }}">
-                        <x-material-details
-                            :name="$material->name"
-                            :image="$material->image"
-                            :description="$material->description"
-                            :environmental_impact="$material->environmental_impact"
-                        />
-                    </a>
-                    
-                    @if(Auth::user()->role === 'admin')
-                    <div class="flex justify-center mb-10">
-                        <div class="flex gap-4 justify-center">
-                            <a href="{{ route('materials.edit', $material) }}"
-                                class="inline-flex items-center justify-center px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-                                Edit Material
-                            </a>
+    <div class="py-12 bg-gray-50">
+        <div class="max-w-5xl mx-auto px-6">
 
-                            <form action="{{ route('materials.destroy', $material) }}" method="POST" class="inline-flex"
-                                onsubmit="return confirm('Delete this material?');">
-                                @csrf
-                                @method('DELETE')
+            <!-- Material Card -->
+            <div class="bg-white shadow-md rounded-xl p-8">
 
-                                <button 
-                                    class="inline-flex items-center justify-center px-5 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
-                                    Delete
-                                </button>
-                            </form>
-                        </div>
+                <x-material-details
+                    :name="$material->name"
+                    :image="$material->image"
+                    :description="$material->description"
+                    :environmental_impact="$material->environmental_impact"
+                />
+
+                <!-- Admin Actions -->
+                @if(Auth::user()->role === 'admin')
+
+                    <div class="mt-10 flex justify-end gap-3 border-t pt-6">
+
+                        <a href="{{ route('materials.edit', $material) }}"
+                           class="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                            Edit
+                        </a>
+
+                        <form action="{{ route('materials.destroy', $material) }}"
+                              method="POST"
+                              onsubmit="return confirm('Delete this material?');">
+
+                            @csrf
+                            @method('DELETE')
+
+                            <button class="px-5 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
+                                Delete
+                            </button>
+
+                        </form>
+
                     </div>
-                    @endif
 
-                </div>    
-            </div>        
-        </div>            
-    </div>         
+                @endif
+
+            </div>
+
+        </div>
+    </div>
 </x-app-layout>

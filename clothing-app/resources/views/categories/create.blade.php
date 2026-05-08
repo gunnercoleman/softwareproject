@@ -2,7 +2,7 @@
     <x-app-layout>
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Edit Item') }}
+                {{ __('Create New Category') }}
             </h2>
         </x-slot>
 
@@ -10,20 +10,18 @@
             <div class="max-w-7x1 mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
-                        <h3 class="font-semibold text-lg mb-4">Edit New Item:</h3>
+                        <h3 class="font-semibold text-lg mb-4">Create New Category:</h3>
 
-                        <x-item-form
-                            :action="route('items.update', $item)"
-                            :method="'PUT'"
-                            :item="$item"
-                            :brands="$brands"
-                            :categories="$categories"
-                            :materials="$materials"
+                        <x-category-form 
+                            :action="route('categories.store')"
+                            method="POST"
                         />
+
                     </div>
                 </div>
             </div>
         </div>
 
     </x-app-layout>
+
 </div>

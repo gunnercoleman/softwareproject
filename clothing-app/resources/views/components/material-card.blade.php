@@ -15,12 +15,12 @@
     <div class="p-4 flex flex-col flex-1">
 
         <!-- Title -->
-        <h1 class="font-semibold text-lg mb-2 text-gray-800">
+        <h1 class="font-semibold text-xl mb-2 text-gray-800">
             {{ $name }}
         </h1>
 
         <!-- Description -->
-        <p class="text-sm text-gray-600 mb-4 line-clamp-3">
+        <p class="text-sm text-gray-800 mb-4 line-clamp-3">
             {{ $description }}
         </p>
 

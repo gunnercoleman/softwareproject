@@ -3,7 +3,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             <!-- Hero / Welcome Section -->
-            <div class="bg-white overflow-hidden sm:rounded-lg mb-6 shadow-md">
+
                 <div class="p-8 text-gray-900">
 
                     <h1 class="text-3xl font-bold text-green-800 mb-4">
@@ -15,7 +15,7 @@
                     </p>
 
                 </div>
-            </div>
+
 
             <!-- Banner -->
             <div class="mt-6 rounded-lg overflow-hidden shadow-md mb-6">
@@ -42,9 +42,9 @@
             <!-- Mission Section -->
             <div class="grid md:grid-cols-3 gap-6 mb-6">
                 <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold text-green-800 mb-2">Compare Brands</h3>
+                    <h3 class="text-xl font-semibold text-green-800 mb-2">View Brands and Associated Items</h3>
                     <p class="text-gray-600">
-                        View side-by-side comparisons of sustainable and non-sustainable clothing brands to better understand their impact.
+                        View details about various clothing brands and the items they offer. Learn about their sustainability practices, materials used, and environmental impact to make informed shopping decisions.
                     </p>
                 </div>
                 <div class="bg-white p-6 rounded-lg shadow-md">

@@ -17,6 +17,7 @@
                             method="POST"
                             :brands="$brands"
                             :categories="$categories"
+                            :materials="$materials"
                         />
 
                     </div>

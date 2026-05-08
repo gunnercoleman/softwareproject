@@ -19,7 +19,7 @@
         <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"></div>
 
         <!-- Name -->
-        <h2 class="absolute bottom-3 left-4 text-white text-lg font-bold drop-shadow">
+        <h2 class="absolute bottom-3 left-4 text-white text-xl font-bold drop-shadow">
             {{ $name }}
         </h2>
     </div>
@@ -28,7 +28,7 @@
     <div class="p-5 flex flex-col flex-grow">
 
         <!-- Description -->
-        <p class="text-gray-600 text-md leading-relaxed mb-4 flex-grow">
+        <p class="text-gray-800 text-md leading-relaxed mb-4 flex-grow">
             {{ Str::limit($description, 100) }}
         </p>
 
